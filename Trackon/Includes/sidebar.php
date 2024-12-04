@@ -1,15 +1,16 @@
 <?php
 function getBasePath() {
-    $currentScript = $_SERVER['SCRIPT_NAME'];
-    $rootPath = '';
+  $currentScript = $_SERVER['SCRIPT_NAME'];
+  $basePath = '/Trackon/Trackon/';
 
-    if (strpos($currentScript, '/Pages/') !== false) {
-        $rootPath = '../';
-    } else {
-        $rootPath = '/Trackon/';
-    }
-    
-    return $rootPath;
+  if (strpos($currentScript, '/Trackon/') !== false) {
+
+      if (strpos($currentScript, '/Trackon/Pages/') !== false) {
+          $basePath = '../../Trackon/';
+      }
+  }
+
+  return $basePath;
 }
 function isCurrentPage($pageName) {
   $currentPage = basename($_SERVER['PHP_SELF']);
@@ -88,7 +89,7 @@ function isCurrentPage($pageName) {
           </button>
         </li>
         <li class="theme-logout">
-          <form method="post" action="/Trackon/pages/Logout.php">
+          <form method="post" action="<?php echo getBasePath(); ?>Pages/Logout.php">
               <button type="submit" name="logout"  class="theme-btn">
                   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed" style="margin-right: 8px;">
                       <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/>
